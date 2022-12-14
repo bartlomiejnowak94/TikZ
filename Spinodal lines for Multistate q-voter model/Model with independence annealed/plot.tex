@@ -1,0 +1,165 @@
+\documentclass[border=1pt]{standalone}
+\usepackage{pgfplots,pgfplotstable}
+\usepackage{filecontents}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+\usetikzlibrary{spy,backgrounds}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\definecolor{mycolor}{RGB}{171,232,132}
+
+\usetikzlibrary{3d}
+
+\begin{document}
+\newcommand{\sizein}{1.0}
+\newcommand{\distin}{0.05}
+\newcommand{\opacity}{1}
+\newcommand{\xDist}{2.0}
+
+% \begin{tikzpicture}[spy using outlines={circle, magnification=3, size=0.5cm, connect spies}]
+\begin{tikzpicture}[
+    %kwadraty do insetow
+    wbx/.style = {draw, opacity=\opacity, minimum size=\distin cm, outer sep=0pt}   
+]
+\tikzstyle{every node}=[font=\Large] %rozmiaru fontu
+%glowny plot
+\begin{axis}[
+    view = {80}{45},
+    xtick={2,3,4,5},
+    ytick={1,5,10,15,20},
+    % ytick style = {gray},
+    % x dir=reverse,
+    xmin=2,
+    xmax=5,
+    ymin=0,
+    ymax=20,
+    zmin=0,
+    zmax=0.4,
+    width = 4in,
+    height = 4in,
+    xlabel = {$s$},
+    ylabel = {$q$},
+    zlabel = {$p$},
+    % axis lines = center 
+]
+%2
+%gorna linia fill
+\addplot3 [pattern=crosshatch, pattern color=red] table
+{Linie_spinodali_3d_up_s2.txt}\closedcycle;
+\addplot3 [solid,black, thick] table
+{Linie_spinodali_3d_up_s2.txt};
+%dolna linia fill
+\addplot3 [fill=mycolor, draw=none] table
+{Linie_spinodali_3d_low_s2.txt}\closedcycle;
+%dolna linia dashed line
+\addplot3 [dotted,black, very thick] table
+{Linie_spinodali_3d_low_s2.txt};
+%3
+%gorna linia fill
+\addplot3 [pattern=crosshatch, pattern color=red] table
+{Linie_spinodali_3d_up_s3.txt}\closedcycle;
+\addplot3 [solid,black, thick] table
+{Linie_spinodali_3d_up_s3.txt};
+%dolna linia fill
+\addplot3 [fill=mycolor, draw=none] table
+{Linie_spinodali_3d_low_s3.txt}\closedcycle;
+%dolna linia dashed line
+\addplot3 [dotted,black, very thick] table
+{Linie_spinodali_3d_low_s3.txt};
+%4
+%gorna linia fill
+\addplot3 [pattern=crosshatch, pattern color=red] table
+{Linie_spinodali_3d_up_s4.txt}\closedcycle;
+\addplot3 [solid,black, thick] table
+{Linie_spinodali_3d_up_s4.txt};
+%dolna linia fill
+\addplot3 [fill=mycolor, draw=none] table
+{Linie_spinodali_3d_low_s4.txt}\closedcycle;
+%dolna linia dashed line
+\addplot3 [dotted,black, very thick] table
+{Linie_spinodali_3d_low_s4.txt};
+%5
+%gorna linia fill
+\addplot3 [pattern=crosshatch, pattern color=red] table
+{Linie_spinodali_3d_up_s5.txt}\closedcycle;
+\addplot3 [solid,black, thick] table
+{Linie_spinodali_3d_up_s5.txt};
+%dolna linia fill
+\addplot3 [fill=mycolor, draw=none] table
+{Linie_spinodali_3d_low_s5.txt}\closedcycle;
+%dolna linia dashed line
+\addplot3 [dotted,black, very thick] table
+{Linie_spinodali_3d_low_s5.txt};       
+
+%coordynaty do lini siatki
+\coordinate (d1) at (300,50,0){};
+\coordinate (d2) at (0,50,0){};
+\coordinate (d3) at (2,50,410){};
+\coordinate (d10) at (295,54,410){};
+%
+\coordinate (d4) at (2,10,0){};
+\coordinate (d5) at (300,10,0){};
+%
+\coordinate (d6) at (2,100,0){};
+\coordinate (d7) at (300,100,0){};
+%
+\coordinate (d8) at (2,150,0){};
+\coordinate (d9) at (300,150,0){};
+%
+\draw [dashed, very thick, gray] (d2) -- (d1);
+\draw [dashed, very thick, gray] (d2) -- (d3);
+% \draw [] (d3) -- (d10);
+% \draw [] (d1) -- (d10);
+% \draw [] (d2) -- (d3);
+\draw [dashed, gray] (d4) -- (d5);
+\draw [dashed, gray] (d6) -- (d7);
+\draw [dashed, gray] (d8) -- (d9);
+\end{axis}
+%narysowanie kwadratow
+\node (w1) [wbx] at (-3.5,0.5,-10) {};
+\node (w2) [wbx] at (-3.05,-0.8,-10) {};
+%polaczenie kwadratow z insetami
+\draw[] (w1.north west) -- (-3,4,-3);
+\draw[] (w2.north west) -- (-3,1,-3);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%inset pierwszy
+\begin{axis}[
+    xmin=1.1,
+    xmax=1.3,
+    ymin=0.1,
+    ymax=0.2,
+    xshift=-1.7 in,
+    yshift=1.8 in,
+    width=0.35\textwidth,
+    ticks=none,
+    % name=MyAxis,
+    title style={yshift=2.5ex,},
+    title={$(a)$}
+    ]
+    \addplot [pattern=crosshatch, pattern color=red] table {Linie_spinodali_3d_up_s2_inset.txt} \closedcycle;
+    \addplot [solid,black, thick] table {Linie_spinodali_3d_up_s2_inset.txt};
+    \addplot [fill=mycolor, draw=none] table {Linie_spinodali_3d_low_s2_inset.txt} \closedcycle;
+    \addplot [dotted,black, very thick] table {Linie_spinodali_3d_low_s2_inset.txt}; 
+\end{axis}
+% \node[align=center, text=black] at (MyAxis.north) {$a$};
+%inset drugi
+\begin{axis}[
+    xmin=1.1,
+    xmax=1.3,
+    ymin=0.1,
+    ymax=0.2,
+    xshift=-1.7 in,
+    yshift=0.4 in,
+    width=0.35\textwidth,
+    ticks=none
+    ]
+    \addplot [pattern=crosshatch, pattern color=red] table {GORNA_LINIA_CIAGLE.txt} \closedcycle;
+    \addplot [solid,black, thick] table {GORNA_LINIA_CIAGLE.txt};
+    \addplot [fill=mycolor, draw=none] table {DOLNA_LINIA_CIAGLE.txt} \closedcycle;
+    \addplot [dotted,black, very thick] table {DOLNA_LINIA_CIAGLE.txt};
+\end{axis}
+\end{tikzpicture}
+\end{document}

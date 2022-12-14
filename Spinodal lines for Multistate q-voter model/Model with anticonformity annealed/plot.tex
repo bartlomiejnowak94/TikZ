@@ -1,0 +1,147 @@
+\documentclass[border=1pt]{standalone}
+\usepackage{pgfplots,pgfplotstable}
+\usepackage{filecontents}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+\usetikzlibrary{spy,backgrounds}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+% \usepackage{mathptmx} %Times New Roman font
+
+\definecolor{mycolor}{RGB}{171,232,132}
+
+\usetikzlibrary{3d}
+
+\begin{document}
+\newcommand{\sizein}{1.0}
+\newcommand{\distin}{0.05}
+\newcommand{\opacity}{1}
+\newcommand{\xDist}{2.0}
+
+% \begin{tikzpicture}[spy using outlines={circle, magnification=3, size=0.5cm, connect spies}]
+\begin{tikzpicture}[
+    %kwadraty do insetow
+    wbx/.style = {draw, opacity=\opacity, minimum size=\distin cm, outer sep=0pt}   
+]
+\tikzstyle{every node}=[font=\Large] %rozmiaru fontu
+%glowny plot
+\begin{axis}[
+    view = {80}{45},
+    xtick={2,3,4,5},
+    ytick={1,5,10,15,20},
+    % ytick style = {gray},
+    x dir=reverse,
+    xmin=2,
+    xmax=5,
+    ymin=0,
+    ymax=20,
+    zmin=0,
+    zmax=1,
+    width = 4in,
+    height = 4in,
+    xlabel = {$s$},
+    ylabel = {$q$},
+    zlabel = {$p$},
+    % axis lines = center 
+]
+%5
+%gorna linia fill
+\addplot3 [pattern=crosshatch, pattern color=red] table
+{Up_s5_anneled.txt}\closedcycle;
+\addplot3 [solid,black, thick] table
+{Up_s5_anneled.txt};
+%dolna linia fill
+\addplot3 [fill=mycolor, draw=none] table
+{Low_s5_anneled.txt}\closedcycle;
+%dolna linia dashed line
+\addplot3 [dotted,black, very thick] table
+{Low_s5_anneled.txt};     
+%4
+%gorna linia fill
+\addplot3 [pattern=crosshatch, pattern color=red] table
+{Up_s4_anneled.txt}\closedcycle;
+\addplot3 [solid,black, thick] table
+{Up_s4_anneled.txt};
+%dolna linia fill
+\addplot3 [fill=mycolor, draw=none] table
+{Low_s4_anneled.txt}\closedcycle;
+%dolna linia dashed line
+\addplot3 [dotted,black, very thick] table
+{Low_s4_anneled.txt};
+%3
+% %gorna linia fill
+\addplot3 [pattern=crosshatch, pattern color=red] table
+{Up_s3_anneled.txt}\closedcycle;
+\addplot3 [solid,black, thick] table
+{Up_s3_anneled.txt};
+%dolna linia fill
+\addplot3 [fill=mycolor, draw=none] table
+{Low_s3_anneled.txt}\closedcycle;
+%dolna linia dashed line
+\addplot3 [dotted,black, very thick] table
+{Low_s3_anneled.txt};
+%2
+%gorna linia fill
+\addplot3 [pattern=crosshatch, pattern color=red] table
+{Up_s2_anneled.txt}\closedcycle;
+\addplot3 [solid,black, thick] table
+{Up_s2_anneled.txt};
+%dolna linia fill
+\addplot3 [fill=mycolor, draw=none] table
+{Low_s2_anneled.txt}\closedcycle;
+%dolna linia dashed line
+\addplot3 [dotted,black, very thick] table
+{Low_s2_anneled.txt};
+
+%coordynaty do kwadratow
+\coordinate (d1) at (axis cs:5,1.1,0.1){};
+\coordinate (d2) at (axis cs:4,1.1,0.1){};
+\draw [dashed, gray] (axis cs:2,1,0) -- (axis cs:5,1,0);
+% \draw [dashed, gray] (axis cs:2,20,0.8) -- (axis cs:5,20,0.8);
+\end{axis}
+% %narysowanie kwadratow
+\node (w1) [wbx] at (d1) {};
+\node (w2) [wbx] at (d2) {};
+%polaczenie kwadratow z insetami
+\draw[] (w1.north west) -- (-3,4,-3);
+\draw[] (w2.north west) -- (-3,1,-3);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%inset pierwszy
+\begin{axis}[
+    xmin=1.1,
+    xmax=1.3,
+    % ymin=0.175,
+    % ymax=0.37,
+    xshift=-1.7 in,
+    yshift=1.8 in,
+    width=0.35\textwidth,
+    ticks=none,
+    % name=MyAxis,
+    title style={yshift=2.5ex,},
+    title={(a)}
+    ]
+    \addplot [pattern=crosshatch, pattern color=red] table {UP_inset_s5_anneled.txt} \closedcycle;
+    \addplot [solid,black, thick] table {UP_inset_s5_anneled.txt};
+    \addplot [fill=mycolor, draw=none] table {Low_inset_s5_anneled.txt} \closedcycle;
+    \addplot [dotted,black, very thick] table {Low_inset_s5_anneled.txt}; 
+\end{axis}
+%inset drugi
+\begin{axis}[
+    xmin=1.1,
+    xmax=1.3,
+    % ymin=0.135,
+    % ymax=0.3,
+    xshift=-1.7 in,
+    yshift=0.4 in,
+    width=0.35\textwidth,
+    ticks=none
+    ]
+    \addplot [pattern=crosshatch, pattern color=red] table {UP_inset_s4_anneled.txt} \closedcycle;
+    \addplot [solid,black, thick] table {UP_inset_s4_anneled.txt};
+    \addplot [fill=mycolor, draw=none] table {Low_inset_s4_anneled.txt} \closedcycle;
+    \addplot [dotted,black, very thick] table {Low_inset_s4_anneled.txt}; 
+\end{axis}
+\end{tikzpicture}
+\end{document}
