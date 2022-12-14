@@ -1,3 +1,3 @@
 # Beta distributions
 
-<img src="Beta distribution/plot.png" height="600">
+<img src="plot.png" height="600">
