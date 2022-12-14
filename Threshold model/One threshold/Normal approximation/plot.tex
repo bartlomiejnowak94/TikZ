@@ -1,0 +1,79 @@
+\documentclass[border=1pt]{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepackage{filecontents}
+\usepackage{tikz}
+\usepackage{tikzpeople}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usetikzlibrary{patterns}
+\usetikzlibrary{spy,backgrounds}
+\usetikzlibrary{plotmarks}
+
+\definecolor{pomarancz}{HTML}{F5793A}
+\definecolor{fiolet}{HTML}{A95AA1}
+\definecolor{jniebieski}{HTML}{85C0F9}
+\definecolor{niebieski}{HTML}{0F2080}
+\definecolor{zolty}{HTML}{FFC107}
+
+%paleta1
+\definecolor{col1}{HTML}{3Ab795}
+\definecolor{col2}{HTML}{A0E8AF}
+\definecolor{col3}{HTML}{86BAA1}
+\definecolor{col4}{HTML}{EDEAD0}
+\definecolor{col5}{HTML}{FFCF56}
+
+
+
+\pgfplotsset{select coords between index/.style 2 args={
+    x filter/.code={
+        \ifnum\coordindex<#1\def\pgfmathresult{}\fi
+        \ifnum\coordindex>#2\def\pgfmathresult{}\fi
+    }
+}}
+
+\pgfplotsset{scaled y ticks=false}
+
+\begin{document}
+\begin{tikzpicture}
+    \tikzstyle{every node}=[font=\LARGE]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{axis}[
+    xmin=0,
+    xmax=1,
+    ymin=0,
+    ymax=1,
+    width = 4in,
+    height = 4in,
+    ylabel={$c$},
+    xlabel={$p$}
+    ]
+    \addplot [solid,col1,line width=0.5mm,forget plot] table
+    {a_binom_N_500.txt}; 
+    \addplot [solid,black,line width=0.5mm,forget plot] table
+    {a_binom_N_50000.txt}; 
+    \node[below left = 10pt and 10pt, rotate = 25] at (rel axis cs:0.6,0.3) {$N = 5\cdot10^4$};
+    \node[col1,below left = 10pt and 10pt, rotate = -8] at (rel axis cs:0.6,0.53) {$N = 500$};      
+\end{axis}
+\begin{axis}[
+    xmin=0,
+    xmax=1,
+    ymin=0,
+    ymax=1,
+    width = 4in,
+    height = 4in,
+    xshift= 4.3 in,
+    ylabel={$c$},
+    xlabel={$p$}
+    ]
+    \addplot [solid,red,line width=0.5mm,forget plot] table
+    {a_normal_N_500.txt}; 
+    \addplot [solid,black,line width=0.5mm,forget plot] table
+    {a_normal_N_50000.txt}; 
+    \node[below left = 10pt and 10pt, rotate = 25] at (rel axis cs:0.6,0.3) {$N = 5\cdot10^4$};
+    \node[red,below left = 10pt and 10pt, rotate = -8] at (rel axis cs:0.6,0.53) {$N = 500$};      
+\end{axis}
+
+\end{tikzpicture} 
+\end{document}
