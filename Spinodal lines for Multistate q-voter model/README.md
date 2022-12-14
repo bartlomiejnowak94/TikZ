@@ -8,15 +8,11 @@ Plots for spinodal lines for multi-state $q$-voter model. Find out more about mo
 
 ## Model with Independence
 
-[go to the folder]()
-
 | Annealed | Quenched |
 |:---:|:---:|
 |  <img src="Model with independence annealed/plot.png">   |  <img src="Model with independence quenched/plot.png">  |
 
 ## Model with Anticonformity
-
-[go to the folder]()
 
 | Annealed | Quenched |
 |:---:|:---:|
